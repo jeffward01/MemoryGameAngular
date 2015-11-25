@@ -20,6 +20,9 @@ angular.module('app').controller('MemoryGameController', function ($scope, $time
             disabled: false
         })
     }
+    
+    //Shuffle deck once built
+    shuffle($scope.cards);
 
     //Generates the Value of each card in a deck
     function getValue(x) {
@@ -29,11 +32,26 @@ angular.module('app').controller('MemoryGameController', function ($scope, $time
         return x - 1;
     }
 
+    //Shuffle Function
+    function shuffle(deck) {
+        for (var j, x, i = deck.length; i; j = Math.floor(Math.random() * i), x = deck[--i], deck[i] = deck[j], deck[j] = x);
+        return deck;
+    }
 
     $scope.clickCard = function (card) {
 
+        //Valdation: Prevents a card from begin 'seleted' more than once
+        var found = false;
+
+        //Ensure selected card is NOT currently in selectedCards array: sets Found to True if card is seleted twice
+        for (var i = 0; i < $scope.selectedCards.length; i++) {
+            if ($scope.selectedCards[i].id === card.id) {
+                found = true;
+            }
+        }
         //Validation: prevents more than 2 cards 'flipped' over at once 
-        if (!card.disabled && $scope.selectedCards.length < 2) {
+        //Found must be set to 'False' to run
+        if (!card.disabled && $scope.selectedCards.length < 2 && !found) {
             card.flipped = !card.flipped;
 
             //Add selected card to selected card Array
