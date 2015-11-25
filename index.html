@@ -8,11 +8,22 @@
 </head>
 <body ng-controller="MemoryGameController">
     
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex"> Insert Title here</h2>
+        </div>
+    </md-toolbar>
     
-    
-    
-    
-    
+    <md-content class="md-padding">
+        <div layout="row" layout-wrap>
+            <div flex="25" ng-repeat="card in cards">
+                <md-card class="md-padding" ng-click="clickCard(card)">
+                    <img src="img/cardback.png" ng-hide="card.flipped" style="width: 150px; height: 150px; display: block; margin: auto;">
+                    <img src="img/cards/{{card.value}}.png" ng-show="card.flipped"style="width: 150px; height: 150px; display: block; margin: auto;">
+                </md-card>
+            </div>
+        </div>
+    </md-content>
     
     <script src="bower_components/angular/angular.js" type="text/javascript"></script>
     <script src="bower_components/angular-aria/angular-aria.js" type="text/javascript"></script>
