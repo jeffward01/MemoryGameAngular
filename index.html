@@ -61,12 +61,13 @@
     </md-content>
 
 
-    <md-content class="clearfix">
+    <md-content class="clearfix" ng-class="{hide: cards == 0}">
 
         <div id="ScoreBoard">
             <div id="sticky-anchor"></div>
             <div id="sticky" class="">
                 <div class="well" style="width:250px">
+                   <h2 style="margin: 0 auto; text-align: center; border-bottom: 1px black solid">ScoreBoard</h2>
                     <h4>Current Turn: {{PlayerTurn}}</h4>
                     <div class="fontSmall">
                         <table class="table table-striped">
