@@ -15,17 +15,24 @@
     <div class="jumbotron" style="margin-top:-40px;">
         <div class="container center">
             <h1>Memory Card Game</h1>
-            <p>By:Jeff Ward</p>      
-                <div class="btn-group">
-                    <a href="https://github.com/jeffward01/MemoryGameAngular" target="_blank"><button type="button" class="btn btn-lg btn-warning">Github Repo</button></a>
-                    <a href="http://jeffwarddevelopment.com/" target="_blank"><button type="button" class="btn btn-lg btn-primary">Website</button></a>
-                    <a href="https://github.com/jeffward01" target="_blank"><button type="button" class="btn btn-lg btn-info">Github Profile</button></a>
-                    <a href="https://portfolium.com/jeffwardcoding" target="_blank"><button type="button" class="btn btn-lg btn-success">Portfolio</button></a>
-                </div>
-            
+            <p>By:Jeff Ward</p>
+            <div class="btn-group">
+                <a href="https://github.com/jeffward01/MemoryGameAngular" target="_blank">
+                    <button type="button" class="btn btn-lg btn-warning">Github Repo</button>
+                </a>
+                <a href="http://jeffwarddevelopment.com/" target="_blank">
+                    <button type="button" class="btn btn-lg btn-primary">Website</button>
+                </a>
+                <a href="https://github.com/jeffward01" target="_blank">
+                    <button type="button" class="btn btn-lg btn-info">Github Profile</button>
+                </a>
+                <a href="https://portfolium.com/jeffwardcoding" target="_blank">
+                    <button type="button" class="btn btn-lg btn-success">Portfolio</button>
+                </a>
+            </div>
+
         </div>
     </div>
-
 
     <md-content>
         <div style="width:60%; margin: 0 auto;">
@@ -33,21 +40,74 @@
                 <h3>Instructions:</h3>
                 <h4>• Please refer to the <a href="https://en.wikipedia.org/wiki/Concentration_%28game%29" target="_blank">Wiki</a> for specific game insturctions</h4>
                 <h4>• Deck has 32 cards aranged in a 8x4 grid </h4>
-    
+
             </div>
         </div>
+    </md-content>
+    
+        <md-content>
+        <div style="width:60%; margin: 0 auto; ">
+            <div class="row center">
+                <h2>Deck Size</h2>
+                <div class="btn-group center">
+                    <button type="button" ng-click="build(8)" class="btn btn-primary">8 Cards</button>
+                    <button type="button" ng-click="build(16)" class="btn btn-info">16 Cards</button>
+                    <button type="button" ng-click="build(32)" class="btn btn-warning">32 Cards</button>
+                    <button type="button" ng-click="clear()" class="btn btn-danger">Clear Board</button>
+                </div>
+            </div>
+        </div>
+
+    </md-content>
+
+
+    <md-content class="clearfix">
+
+        <div id="ScoreBoard">
+            <div id="sticky-anchor"></div>
+            <div id="sticky" class="">
+                <div class="well" style="width:250px">
+                    <h4>Current Turn: {{PlayerTurn}}</h4>
+                    <div class="fontSmall">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th ng-class="{currentPlayer: PlayerTurn == 'Player 1'}">Player 1</th>
+                                    <th ng-class="{currentPlayer: PlayerTurn == 'Player 2'}">Player 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td ng-class="{currentPlayer: PlayerTurn == 'Player 1'}">Player 1 Total Clicks: {{Player1Clicks}}</td>
+                                    <td ng-class="{currentPlayer: PlayerTurn == 'Player 2'}">Player 2 Total Click: {{Player2Clicks}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p ng-class="{currentPlayer: PlayerTurn == 'Player 1'}">Player 1 Pairs Found: {{Player1PairsFound}}</p>
+                                    </td>
+                                    <td ng-class="{currentPlayer: PlayerTurn == 'Player 2'}">Player 2 Pairs Found: {{Player2PairsFound}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </md-content>
 
 
 
-    <md-content class="md-padding">
+
+    <md-content id="gameArea" class="md-padding">
         <div class="well well-lg center" style="width:80%;">
             <div style="width:80%; margin: 0 auto;">
                 <div layout="row" layout-wrap>
                     <div flex="25" ng-repeat="card in cards">
                         <md-card class="md-padding" ng-click="clickCard(card)">
-                            <img src="img/cardback.png" ng-hide="card.flipped" style="width: 150px; height: 150px; display: block; margin: auto;">
-                            <img src="img/cards/{{card.value}}.png" ng-show="card.flipped" style="width: 150px; height: 150px; display: block; margin: auto;">
+                            <img src="img/cardback.png" ng-class="{ hide: card.flipped }" style="width: 100%; height: auto; display: block; margin: auto;">
+                            <img src="img/cards/{{card.value}}.png" ng-class="{hide: !card.flipped}" style="width: 100%; height: auto; display: block; margin: auto;">
                         </md-card>
                     </div>
                 </div>
@@ -55,6 +115,7 @@
         </div>
     </md-content>
 
+    <div class="footer"></div>
 
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
